@@ -32,7 +32,7 @@ public class BipedEntityModelMixin {
 		cancellable = true
 	)
 	public void poseArms(LivingEntity entity, CallbackInfo ci) {
-		if(entity.getMainHandStack().isOf(Common.BLAHAJ_ITEM) || entity.getOffHandStack().isOf(Common.BLAHAJ_ITEM)) {
+		if(entity.getMainHandStack().getItem() instanceof Common.CuddlyItem || entity.getOffHandStack().getItem() instanceof Common.CuddlyItem) {
 			this.rightArm.pitch = -0.95F;
 			this.rightArm.yaw = (float) (-Math.PI / 8);
 			this.leftArm.pitch = -0.90F;

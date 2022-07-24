@@ -22,7 +22,7 @@ public class PlayerEntityRendererMixin {
 	)
 	private static void cuddleBlahaj(AbstractClientPlayerEntity player, Hand hand, CallbackInfoReturnable<BipedEntityModel.ArmPose> ci) {
 		ItemStack lv = player.getStackInHand(hand);
-		if(lv.isOf(Common.BLAHAJ_ITEM)) {
+		if(lv.getItem() instanceof Common.CuddlyItem) {
 			ci.setReturnValue(ArmPose.CROSSBOW_HOLD);
 			ci.cancel();
 		}
