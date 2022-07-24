@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" # ",
+		"###",
+		"PW "
+	],
+	"key": {
+		"#": {
+			"item": "minecraft:light_blue_wool"
+		},
+		"P": {
+			"item": "minecraft:pink_dye"
+		},
+		"W": {
+			"item": "minecraft:white_wool"
+		}
+	},
+	"result": {
+		"item": "blahaj:blue_shark",
+		"count": 1
+	}
+}
