@@ -4,7 +4,7 @@ A Minecraft mod that adds the IKEA BLÅHAJ Soft toy shark and a giant bread pill
 
 | Item | Preview | Recipe |
 |---|---|---|
-| Blue Shark Pillow | <img src="./.pretty_readme/preview_blue_shark.png" height=124/> | ![Crafting recipe for Blåhaj](./.pretty_readme/recipe_blue_shark.png) |
+| Soft Toy Shark | <img src="./.pretty_readme/preview_blue_shark.png" height=124/> | ![Crafting recipe for Blåhaj](./.pretty_readme/recipe_blue_shark.png) |
 | Bread Pillow | <img src="./.pretty_readme/preview_bread.png" height=124/> | ![Crafting recipe for Bread Pillow](./.pretty_readme/recipe_bread.png) |
 
 ## License
