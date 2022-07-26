@@ -5,6 +5,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [],
 	"client": [
+		"AllayEntityMixin",
 		"AnvilScreenHandlerMixin",
 		"ForgingScreenHandlerMixin",
 		"BipedEntityModelMixin",
