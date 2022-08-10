@@ -2,58 +2,60 @@ package hibi.blahaj;
 
 import java.util.List;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtString;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.util.FakePlayer;
+import org.jetbrains.annotations.Nullable;
 
 public class CuddlyItem extends Item {
 
 	public static final String OWNER_KEY = "Owner";
 
-	private final Text subtitle;
+	private final Component subtitle;
 
-	public CuddlyItem(Settings settings, String subtitle) {
-		super(settings);
-		this.subtitle = subtitle == null? null: Text.translatable(subtitle).formatted(Formatting.GRAY);
+	public CuddlyItem(Properties properties, String subtitle) {
+		super(properties);
+		this.subtitle = subtitle == null? null: Component.translatable(subtitle).withStyle(ChatFormatting.GRAY);
 	}
 
 	@Override
-	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
-		if(this.subtitle != null) {
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag context) {
+		if (this.subtitle != null) {
 			tooltip.add(this.subtitle);
 		}
-		if(stack.hasNbt()) {
-			NbtCompound nbt = stack.getNbt();
+		if (stack.hasTag()) {
+			CompoundTag nbt = stack.getTag();
 			String owner = nbt.getString(OWNER_KEY);
-			if(owner == "") {
+			if (owner == "") {
 				return;
 			}
-			if(stack.hasCustomName()) {
-				tooltip.add(Text.translatable("tooltip.blahaj.owner.rename", this.getName(), Text.literal(owner)).formatted(Formatting.GRAY));
+			if (stack.hasCustomHoverName()) {
+				tooltip.add(Component.translatable("tooltip.blahaj.owner.rename", this.getDescription(), Component.literal(owner)).withStyle(ChatFormatting.GRAY));
 			}
 			else {
-				tooltip.add(Text.translatable("tooltip.blahaj.owner.craft", Text.literal(owner)).formatted(Formatting.GRAY));
+				tooltip.add(Component.translatable("tooltip.blahaj.owner.craft", Component.literal(owner)).withStyle(ChatFormatting.GRAY));
 			}
 		}
 	}
 
 	@Override
-	public void onCraft(ItemStack stack, World world, PlayerEntity player) {
-		if(player != null) { // compensate for auto-crafter mods
-			stack.setSubNbt(OWNER_KEY, NbtString.of(player.getName().getString()));
+	public void onCraftedBy(ItemStack stack, Level level, Player player) {
+		if (player != null && !(player instanceof FakePlayer)) { // compensate for auto-crafter mods
+			stack.addTagElement(OWNER_KEY, StringTag.valueOf(player.getName().getString()));
 		}
-		super.onCraft(stack, world, player);
+		super.onCraftedBy(stack, level, player);
 	}
-	
+
 	@Override
-	public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
-		return 0.25f;
+	public float getDestroySpeed(ItemStack stack, BlockState state) {
+		return super.getDestroySpeed(stack, state);
 	}
 }

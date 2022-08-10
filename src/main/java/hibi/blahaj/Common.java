@@ -1,24 +1,20 @@
 package hibi.blahaj;
 
-import org.quiltmc.loader.api.ModContainer;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-
+@Mod(Common.MOD_ID)
 public class Common {
+	public static final String MOD_ID = "blahaj";
 
-	public static final Identifier BLAHAJ_ID;
-	public static final Identifier BREAD_ID;
-
-	public void onInitialize(ModContainer mod) {
-		Registry.register(Registry.ITEM, BLAHAJ_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), "item.blahaj.blue_shark.tooltip"));
-		Registry.register(Registry.ITEM, BREAD_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), null));
-	}
-
-	static {
-		BLAHAJ_ID = new Identifier("blahaj", "blue_shark");
-		BREAD_ID = new Identifier("blahaj", "bread");
+	public Common() {
+		DeferredRegister<Item> items = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
+		items.register("blue_shark", () -> new CuddlyItem(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_MISC), "item.blahaj.blue_shark.tooltip"));
+		items.register("bread", () -> new CuddlyItem(new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_MISC), null));
+		items.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 }

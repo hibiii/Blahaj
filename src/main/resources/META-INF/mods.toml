@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="Unlicense"
+[[mods]]
+modId="blahaj"
+version="${file.jarVersion}"
+displayName="Blåhaj"
+displayURL="https://hibiscus.pet/mods/blahaj"
+logoFile="icon.png"
+credits="Thanks for this example mod goes to Java"
+authors="Hibi, port by agnor99"
+
+description='''
+Soft toy, shark mod, 16px.
+'''
+[[dependencies.blahaj]]
+    modId="forge"
+    mandatory=true
+    versionRange="[43,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.blahaj]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.2,1.20)"
+    ordering="NONE"
+    side="BOTH"
