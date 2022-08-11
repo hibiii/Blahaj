@@ -9,7 +9,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtString;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
@@ -21,7 +23,7 @@ public class CuddlyItem extends Item {
 
 	public CuddlyItem(Settings settings, String subtitle) {
 		super(settings);
-		this.subtitle = subtitle == null? null: Text.translatable(subtitle).formatted(Formatting.GRAY);
+		this.subtitle = subtitle == null? null: new TranslatableText(subtitle).formatted(Formatting.GRAY);
 	}
 
 	@Override
@@ -36,10 +38,10 @@ public class CuddlyItem extends Item {
 				return;
 			}
 			if(stack.hasCustomName()) {
-				tooltip.add(Text.translatable("tooltip.blahaj.owner.rename", this.getName(), Text.literal(owner)).formatted(Formatting.GRAY));
+				tooltip.add(new TranslatableText("tooltip.blahaj.owner.rename", this.getName(), new LiteralText(owner)).formatted(Formatting.GRAY));
 			}
 			else {
-				tooltip.add(Text.translatable("tooltip.blahaj.owner.craft", Text.literal(owner)).formatted(Formatting.GRAY));
+				tooltip.add(new TranslatableText("tooltip.blahaj.owner.craft", new LiteralText(owner)).formatted(Formatting.GRAY));
 			}
 		}
 	}
@@ -51,7 +53,7 @@ public class CuddlyItem extends Item {
 		}
 		super.onCraft(stack, world, player);
 	}
-	
+
 	@Override
 	public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
 		return 0.25f;
