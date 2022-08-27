@@ -64,6 +64,7 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${archivesBaseName}" }
 	}
+	from "common"
 }
 
 // Configure the maven publication
