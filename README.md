@@ -9,6 +9,17 @@ A Minecraft mod that adds the IKEA BLÅHAJ Soft toy shark and a giant bread pill
 | Soft Toy Shark | <img src="./.pretty_readme/preview_blue_shark.png" height=124/> | ![Crafting recipe for Blåhaj](./.pretty_readme/recipe_blue_shark.png) |
 | Bread Pillow | <img src="./.pretty_readme/preview_bread.png" height=124/> | ![Crafting recipe for Bread Pillow](./.pretty_readme/recipe_bread.png) |
 
+## Building
+
+Building? 🙂
+
+Blåhaj Mod doesn't have a very well structured build system — in fact, each mod platform should have its own `build.gradle`, and is its own subproject. If you want detailed instructions...
+
+	cd platform-${loader}-${version}
+	./gradlew build
+
+Inspired by [Unascribed's Ears](https://git.sleeping.town/unascribed/Ears).
+
 ## License
 
 This mod is licensed under the [Unlicense](./LICENSE). Feel free to learn from it and incorporate it in your own projects.

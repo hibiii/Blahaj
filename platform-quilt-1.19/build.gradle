@@ -4,7 +4,7 @@ plugins {
 }
 
 archivesBaseName = project.archives_base_name
-version = project.version
+version = file('../version.txt').text.trim()
 group = project.maven_group
 
 repositories {
@@ -64,7 +64,7 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${archivesBaseName}" }
 	}
-	from "common"
+	from "../common"
 }
 
 // Configure the maven publication
