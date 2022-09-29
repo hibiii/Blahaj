@@ -1,6 +1,8 @@
 {
 	"item.blahaj.blue_shark": "Soft Toy Shark",
 	"item.blahaj.blue_shark.tooltip": "a.k.a. Blahaj",
+	"item.blahaj.gray_shark": "Gray Toy Shark",
+	"item.blahaj.gray_shark.tooltip": "a.k.a. Klappar Haj",
 	"item.blahaj.bread": "Bread Pillow",
 	"tooltip.blahaj.owner.craft": "Crafted by %s",
 	"tooltip.blahaj.owner.rename": "%s of %s"
