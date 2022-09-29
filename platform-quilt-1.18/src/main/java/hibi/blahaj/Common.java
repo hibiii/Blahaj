@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.ItemEntry;
@@ -27,24 +28,27 @@ public class Common {
 				|| id.equals(LootTables.STRONGHOLD_CORRIDOR_CHEST)) {
 				LootPool.Builder pb = LootPool.builder()
 					.with(ItemEntry.builder(blueShark)
-						.weight(5));
-				tableBuilder.pool(pb);
-			}
-			else if(id.equals(LootTables.HERO_OF_THE_VILLAGE_SHEPHERD_GIFT_GAMEPLAY)) {
-				LootPool.Builder pb = LootPool.builder()
-					.with(ItemEntry.builder(blueShark));
+						.weight(5))
+					.with(ItemEntry.builder(Items.AIR)
+						.weight(100));
+					// Sum of weights of SH Corridor ≈ 100
+					// SOW of SH Crossing ≈ 60
 				tableBuilder.pool(pb);
 			}
 			else if(id.equals(LootTables.VILLAGE_PLAINS_CHEST)) {
 				LootPool.Builder pb = LootPool.builder()
-					.with(ItemEntry.builder(blueShark));
+					.with(ItemEntry.builder(blueShark))
+					.with(ItemEntry.builder(Items.AIR)
+						.weight(43));
 				tableBuilder.pool(pb);
 			}
 			else if(id.equals(LootTables.VILLAGE_TAIGA_HOUSE_CHEST)
 				|| id.equals(LootTables.VILLAGE_SNOWY_HOUSE_CHEST)) {
 				LootPool.Builder pb = LootPool.builder()
 					.with(ItemEntry.builder(blueShark)
-						.weight(5));
+						.weight(5))
+					.with(ItemEntry.builder(Items.AIR)
+						.weight(54));
 				tableBuilder.pool(pb);
 			}
 		});
