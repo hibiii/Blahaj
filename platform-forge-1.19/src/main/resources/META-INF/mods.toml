@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="All rights reserved"
+[[mods]]
+modId="blahaj"
+version="${file.jarVersion}"
+displayName="Blåhaj"
+displayURL="https://hibiscus.pet/mods/blahaj"
+logoFile="icon.png"
+credits="Original Blåhaj by IKEA. Ported to Forge by Random832."
+authors="hibi"
+description='''
+Soft toy, shark mod, 16px.
+'''
+[[dependencies.examplemod]]
+    modId="forge"
+    mandatory=true
+    versionRange="[43,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.examplemod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.2,1.20)"
+    ordering="NONE"
+    side="BOTH"
