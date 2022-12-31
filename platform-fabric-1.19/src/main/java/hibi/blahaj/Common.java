@@ -2,14 +2,18 @@ package hibi.blahaj;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.village.TradeOffer;
+import net.minecraft.village.VillagerProfession;
 
 public class Common implements ModInitializer {
 
@@ -51,12 +55,11 @@ public class Common implements ModInitializer {
 			}
 		});
 
-		// FIXME replace with QSL
-		/*TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, factories -> {
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 				new ItemStack(Items.EMERALD, 15), new ItemStack(grayShark),
 				2, 30, 0.1f));
-		});*/
+		});
 	}
 
 	static {
