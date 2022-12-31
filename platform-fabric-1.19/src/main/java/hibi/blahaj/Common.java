@@ -26,7 +26,6 @@ public class Common implements ModInitializer {
 		Registry.register(Registry.ITEM, BLAHAJ_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), "item.blahaj.blue_shark.tooltip"));
 		Registry.register(Registry.ITEM, BREAD_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), null));
 
-		// FIXME replace with QSL
 		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
 			if(id.equals(LootTables.STRONGHOLD_CROSSING_CHEST)
 				|| id.equals(LootTables.STRONGHOLD_CORRIDOR_CHEST)) {
