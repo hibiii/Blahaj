@@ -1,10 +1,11 @@
 package hibi.blahaj;
 
-import org.quiltmc.loader.api.ModContainer;
-
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
-import org.quiltmc.qsl.villager.api.TradeOfferHelper;
+
+import java.util.List;
+import java.util.function.Consumer;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
@@ -16,6 +17,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.TradeOffer;
+import net.minecraft.village.TradeOffers;
 import net.minecraft.village.VillagerProfession;
 
 public class Common {
@@ -24,7 +26,12 @@ public class Common {
 	public static final Identifier KLAPPAR_HAJ_ID;
 	public static final Identifier BREAD_ID;
 
-	public void onInitialize(ModContainer mod) {
+	public void onInitializeQuilt(Object _mod) {
+		// NOTE: Cast `_mod` to `ModContainer` before using it.
+		this.onInitialize();
+	}
+
+	public void onInitialize() {
 		Item grayShark = new CuddlyItem(new Item.Settings().maxCount(1), "item.blahaj.gray_shark.tooltip");
 		Registry.register(Registries.ITEM, KLAPPAR_HAJ_ID, grayShark);
 
@@ -41,7 +48,6 @@ public class Common {
 			content.addItem(breadPillow);
 		});
 
-		// FIXME replace with QSL
 		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
 			if(!source.isBuiltin()) return;
 			if(id.equals(LootTables.STRONGHOLD_CROSSING_CHEST)
@@ -71,12 +77,22 @@ public class Common {
 			}
 		});
 
-		// FIXME replace with QSL
-		TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, factories -> {
+		Consumer<List<TradeOffers.Factory>> lambda = factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 				new ItemStack(Items.EMERALD, 15), new ItemStack(grayShark),
 				2, 30, 0.1f));
-		});
+		};
+
+		try {
+			// Assume we're on Quilt
+			org.quiltmc.qsl.villager.api.
+			TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, lambda);
+		}
+		catch (NoClassDefFoundError e) {
+			// Otherwise, we must be on F****c
+			net.fabricmc.fabric.api.object.builder.v1.trade.
+			TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, lambda);
+		}
 	}
 
 	static {

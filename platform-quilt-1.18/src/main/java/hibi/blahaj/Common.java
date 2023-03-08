@@ -1,6 +1,5 @@
 package hibi.blahaj;
 
-import org.quiltmc.loader.api.ModContainer;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.minecraft.item.Item;
@@ -21,12 +20,16 @@ public class Common {
 	public static final Identifier KLAPPAR_HAJ_ID;
 	public static final Identifier BREAD_ID;
 
-	public void onInitialize(ModContainer mod) {
+	public void onInitializeQuilt(Object _mod) {
+		// NOTE: Cast `_mod` to `ModContainer` before using it.
+		this.onInitialize();
+	}
+
+	public void onInitialize() {
 		Item grayShark = Registry.register(Registry.ITEM, KLAPPAR_HAJ_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), "item.blahaj.gray_shark.tooltip"));
 		Registry.register(Registry.ITEM, BLAHAJ_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), "item.blahaj.blue_shark.tooltip"));
 		Registry.register(Registry.ITEM, BREAD_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), null));
 
-		// FIXME replace with QSL
 		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
 			if(!source.isBuiltin()) return;
 			if(id.equals(LootTables.STRONGHOLD_CROSSING_CHEST)
@@ -58,7 +61,6 @@ public class Common {
 			}
 		});
 
-		// FIXME replace with QSL
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 				new ItemStack(Items.EMERALD, 15), new ItemStack(grayShark),
