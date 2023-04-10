@@ -24,6 +24,7 @@ public class Common {
 
 	public static final Identifier BLAHAJ_ID;
 	public static final Identifier KLAPPAR_HAJ_ID;
+	public static final Identifier BLAVINGAD_ID;
 	public static final Identifier BREAD_ID;
 
 	public void onInitializeQuilt(Object _mod) {
@@ -38,6 +39,9 @@ public class Common {
 		Item blueShark = new CuddlyItem(new Item.Settings().maxCount(1), "item.blahaj.blue_shark.tooltip");
 		Registry.register(Registries.ITEM, BLAHAJ_ID, blueShark);
 
+		Item blueWhale = new ItemContainerCuddlyItem(new Item.Settings().maxCount(1), "item.blahaj.blue_whale.tooltip");
+		Registry.register(Registries.ITEM, BLAVINGAD_ID, blueWhale);
+
 		Item breadPillow = new CuddlyItem(new Item.Settings().maxCount(1), null);
 		Registry.register(Registries.ITEM, BREAD_ID, breadPillow);
 
@@ -45,6 +49,7 @@ public class Common {
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register((content) -> {
 			content.addItem(blueShark);
 			content.addItem(grayShark);
+			content.addItem(blueWhale);
 			content.addItem(breadPillow);
 		});
 
@@ -98,6 +103,7 @@ public class Common {
 	static {
 		BLAHAJ_ID = new Identifier("blahaj", "blue_shark");
 		KLAPPAR_HAJ_ID = new Identifier("blahaj", "gray_shark");
+		BLAVINGAD_ID = new Identifier("blahaj", "blue_whale");
 		BREAD_ID = new Identifier("blahaj", "bread");
 	}
 }
