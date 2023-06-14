@@ -18,6 +18,7 @@ public class Common {
 
 	public static final Identifier BLAHAJ_ID;
 	public static final Identifier KLAPPAR_HAJ_ID;
+	public static final Identifier BLAVINGAD_ID;
 	public static final Identifier BREAD_ID;
 
 	public void onInitializeQuilt(Object _mod) {
@@ -27,7 +28,11 @@ public class Common {
 
 	public void onInitialize() {
 		Item grayShark = Registry.register(Registry.ITEM, KLAPPAR_HAJ_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), "item.blahaj.gray_shark.tooltip"));
+
 		Registry.register(Registry.ITEM, BLAHAJ_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), "item.blahaj.blue_shark.tooltip"));
+
+		Registry.register(Registry.ITEM, BLAVINGAD_ID, new ItemContainerCuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), "item.blahaj.blue_whale.tooltip"));
+
 		Registry.register(Registry.ITEM, BREAD_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), null));
 
 		// FIXME replace with QSL
@@ -71,6 +76,7 @@ public class Common {
 	static {
 		BLAHAJ_ID = new Identifier("blahaj", "blue_shark");
 		KLAPPAR_HAJ_ID = new Identifier("blahaj", "gray_shark");
+		BLAVINGAD_ID = new Identifier("blahaj", "blue_whale");
 		BREAD_ID = new Identifier("blahaj", "bread");
 	}
 }
