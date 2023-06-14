@@ -2,6 +2,7 @@ package hibi.blahaj;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -26,11 +27,6 @@ public class Common {
 	public static final Identifier KLAPPAR_HAJ_ID;
 	public static final Identifier BLAVINGAD_ID;
 	public static final Identifier BREAD_ID;
-
-	public void onInitializeQuilt(Object _mod) {
-		// NOTE: Cast `_mod` to `ModContainer` before using it.
-		this.onInitialize();
-	}
 
 	public void onInitialize() {
 		Item grayShark = new CuddlyItem(new Item.Settings().maxCount(1), "item.blahaj.gray_shark.tooltip");
@@ -88,16 +84,7 @@ public class Common {
 				2, 30, 0.1f));
 		};
 
-		try {
-			// Assume we're on Quilt
-			org.quiltmc.qsl.villager.api.
-			TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, lambda);
-		}
-		catch (NoClassDefFoundError e) {
-			// Otherwise, we must be on F****c
-			net.fabricmc.fabric.api.object.builder.v1.trade.
-			TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, lambda);
-		}
+		TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, lambda);
 	}
 
 	static {

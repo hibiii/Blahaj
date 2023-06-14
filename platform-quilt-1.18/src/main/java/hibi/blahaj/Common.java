@@ -21,11 +21,6 @@ public class Common {
 	public static final Identifier BLAVINGAD_ID;
 	public static final Identifier BREAD_ID;
 
-	public void onInitializeQuilt(Object _mod) {
-		// NOTE: Cast `_mod` to `ModContainer` before using it.
-		this.onInitialize();
-	}
-
 	public void onInitialize() {
 		Item grayShark = Registry.register(Registry.ITEM, KLAPPAR_HAJ_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), "item.blahaj.gray_shark.tooltip"));
 

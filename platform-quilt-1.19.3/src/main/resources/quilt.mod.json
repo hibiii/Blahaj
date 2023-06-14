@@ -21,7 +21,7 @@
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "hibi.blahaj.Common::onInitializeQuilt"
+			"init": "hibi.blahaj.Common::onInitialize"
 		},
 		"depends": [
 			{
