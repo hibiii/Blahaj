@@ -4,7 +4,7 @@
 	"item.blahaj.gray_shark": "Mjukleksak Gråhaj",
 	"item.blahaj.gray_shark.tooltip": "alias Klappar Haj",
 	"item.blahaj.blue_whale": "Mjukleksak Blåval",
-	"item.blahaj.blue_whale.tooltip": "alias Blåvingad. Kan innehålla ett föremål",
+	"item.blahaj.blue_whale.tooltip": "alias Blåvingad. Kan innehålla en hög med föremål",
 	"item.blahaj.bread": "Brödkudde",
 	"tooltip.blahaj.owner.craft": "Skapad av %s",
 	"tooltip.blahaj.owner.rename": "%s av %s"

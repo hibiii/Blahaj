@@ -1,12 +1,20 @@
 package hibi.blahaj;
 
+import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
+
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.BundleItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
+import net.minecraft.world.World;
 
 public class ItemContainerCuddlyItem extends CuddlyItem {
 
@@ -21,24 +29,27 @@ public class ItemContainerCuddlyItem extends CuddlyItem {
 		if (clickType != ClickType.RIGHT) {
 			return false;
 		}
-		NbtCompound nbt = thisStack.getOrCreateNbt();
-		if (nbt.contains(STORED_ITEM_KEY)) {
-			ItemStack storedItem = ItemStack.fromNbt(nbt.getCompound(STORED_ITEM_KEY));
-			if (!otherSlot.canInsert(storedItem)) {
+		ItemStack otherStack = otherSlot.getStack();
+		NbtCompound storedItemNbt = thisStack.getSubNbt(STORED_ITEM_KEY);
+		if (storedItemNbt != null) {
+			if (!otherStack.isEmpty()) {
 				return false;
 			}
-			otherSlot.insertStack(storedItem);
-			nbt.remove(STORED_ITEM_KEY);
+			ItemStack storedStack = ItemStack.fromNbt(storedItemNbt);
+			if (!otherSlot.canInsert(storedStack)) {
+				return false;
+			}
+			otherSlot.insertStack(storedStack, DEFAULT_MAX_COUNT);
+			ItemContainerCuddlyItem.storeItemStack(thisStack, null);
 			return true;
 		} else {
-			ItemStack otherStack = otherSlot.getStack();
 			if (otherStack.isEmpty()) {
 				return false;
 			}
 			if (!ItemContainerCuddlyItem.canHold(otherStack)) {
 				return false;
 			}
-			ItemContainerCuddlyItem.addItem(thisStack, otherStack);
+			ItemContainerCuddlyItem.storeItemStack(thisStack, otherStack);
 			return true;
 		}
 	}
@@ -49,22 +60,29 @@ public class ItemContainerCuddlyItem extends CuddlyItem {
 			return false;
 		}
 
-		NbtCompound nbt = thisStack.getOrCreateNbt();
-		if (nbt.contains(STORED_ITEM_KEY)) {
-			ItemStack storedItem = ItemStack.fromNbt(nbt.getCompound(STORED_ITEM_KEY));
-			if (!ItemStack.canCombine(otherStack, storedItem)) {
-				return false;
-			}
-			otherStack.increment(storedItem.getCount());
-			nbt.remove(STORED_ITEM_KEY);
-			return true;
+		NbtCompound storedItemNbt = thisStack.getSubNbt(STORED_ITEM_KEY);
+		if (storedItemNbt != null) {
+			return false;
 		} else {
 			if (!ItemContainerCuddlyItem.canHold(otherStack)) {
 				return false;
 			}
-			ItemContainerCuddlyItem.addItem(thisStack, otherStack);
+			ItemContainerCuddlyItem.storeItemStack(thisStack, otherStack);
 			return true;
 		}
+	}
+
+	@Override
+	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+		super.appendTooltip(stack, world, tooltip, context);
+		NbtCompound itemsNbt = stack.getSubNbt(STORED_ITEM_KEY);
+		if (itemsNbt == null) {
+			return;
+		}
+		ItemStack storedStack = ItemStack.fromNbt(itemsNbt);
+		MutableText text = storedStack.getName().copy();
+		text.append(" x").append(String.valueOf(storedStack.getCount()));
+		tooltip.add(text);
 	}
 
 	protected static boolean canHold(ItemStack otherStack) {
@@ -76,10 +94,26 @@ public class ItemContainerCuddlyItem extends CuddlyItem {
 		return true;
 	}
 
-	protected static void addItem(ItemStack thisStack, ItemStack otherStack) {
-		ItemStack one = otherStack.copy();
-		otherStack.decrement(1);
-		one.setCount(1);
-		thisStack.getOrCreateNbt().put(STORED_ITEM_KEY, one.writeNbt(new NbtCompound()));
+	protected static void storeItemStack(ItemStack thisStack, @Nullable ItemStack otherStack) {
+		NbtCompound nbt = thisStack.getOrCreateNbt();
+		if (otherStack == null || otherStack.isEmpty()) {
+			nbt.remove(STORED_ITEM_KEY);
+		} else {
+			thisStack.getOrCreateNbt().put(STORED_ITEM_KEY, otherStack.writeNbt(new NbtCompound()));
+			otherStack.setCount(0);
+		}
+	}
+
+	protected static boolean mergeStacks(ItemStack dest, ItemStack source) {
+		if (!ItemStack.canCombine(dest, source)) {
+			return false;
+		}
+		int destCount = dest.getCount();
+		int sourceCount = source.getCount();
+		int destMax = dest.getMaxCount();
+		dest.increment(destCount + sourceCount);
+		int surplus = destCount + sourceCount - destMax;
+		source.setCount(surplus);
+		return source.isEmpty();
 	}
 }
