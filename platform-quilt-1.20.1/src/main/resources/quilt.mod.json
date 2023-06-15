@@ -1,0 +1,41 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "hibi",
+		"id": "blahaj",
+		"version": "${version}",
+		"metadata": {
+			"name": "Blåhaj",
+			"description": "Soft toy, shark mod, 16px.",
+			"contributors": {
+				"hibi": "Owner",
+				"infoplayerstart": "Translator"
+			},
+			"contact": {
+				"homepage": "https://hibiscus.pet/mods/blahaj",
+				"issues": "https://github.com/Hibiii/Blahaj/issues",
+				"sources": "https://github.com/Hibiii/Blahaj"
+			},
+			"icon": "assets/blahaj/icon.png",
+			"license": "Unlicense"
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"init": "hibi.blahaj.Common::onInitializeQuilt"
+		},
+		"depends": [
+			{
+				"id": "quilt_loader"
+			},
+			{
+				"id": "quilted_fabric_api",
+				"versions": ">=7.0.0-"
+			},
+			{
+				"id": "minecraft",
+				"versions": ">=1.20.1"
+			}
+		]
+	},
+	"mixin": "blahaj.mixins.json"
+}
