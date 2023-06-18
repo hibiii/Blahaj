@@ -20,6 +20,8 @@ Blåhaj Mod doesn't have a very well structured build system — in fact, each m
 	cd platform-${loader}-${version}
 	./gradlew build
 
+If you'd like a one-liner that builds everything, then `for platform in $(ls -d platform-*); do pushd "$platform"; ./gradlew build; popd; done` on the root of the project (POSIX sh only or compatible).
+
 Inspired by [Unascribed's Ears](https://git.sleeping.town/unascribed/Ears).
 
 ## License
