@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" # ",
+		"###",
+		"GW "
+	],
+	"key": {
+		"#": {
+			"item": "minecraft:blue_wool"
+		},
+		"G": {
+			"item": "minecraft:light_gray_wool"
+		},
+		"W": {
+			"item": "minecraft:white_wool"
+		}
+	},
+	"result": {
+		"item": "blahaj:blue_whale",
+		"count": 1
+	}
+}
