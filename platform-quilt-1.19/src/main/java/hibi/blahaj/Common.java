@@ -35,7 +35,6 @@ public class Common {
 
 		Registry.register(Registry.ITEM, BREAD_ID, new CuddlyItem(new Item.Settings().maxCount(1).group(ItemGroup.MISC), null));
 
-		// FIXME replace with QSL
 		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
 			if(!source.isBuiltin()) return;
 			if(id.equals(LootTables.STRONGHOLD_CROSSING_CHEST)
@@ -65,7 +64,6 @@ public class Common {
 			}
 		});
 
-		// FIXME replace with QSL
 		TradeOfferHelper.registerVillagerOffers(VillagerProfession.SHEPHERD, 5, factories -> {
 			factories.add((entity, random) -> new TradeOffer(
 				new ItemStack(Items.EMERALD, 15), new ItemStack(grayShark),
