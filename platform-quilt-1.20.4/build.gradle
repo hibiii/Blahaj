@@ -1,0 +1,32 @@
+plugins {
+    id 'base'
+    id 'org.quiltmc.loom' version '1.4.+'
+}
+
+archivesBaseName = 'blahaj-quilt-1.20.4'
+version = file('../version.txt').text.trim()
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.20.4'
+    mappings "org.quiltmc:quilt-mappings:${project.deps_mappings}"
+    modImplementation "org.quiltmc:quilt-loader:${project.deps_loader}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.deps_fapi}"
+}
+
+processResources {
+    filesMatching(['quilt.mod.json', 'fabric.mod.json']) {
+        expand 'version': version
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+    from('../LICENSE') {
+        rename { "${it}_blahaj" }
+    }
+    from('../common')
+}
