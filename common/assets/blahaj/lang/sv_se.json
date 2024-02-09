@@ -7,5 +7,6 @@
 	"item.blahaj.blue_whale.tooltip": "alias Blåvingad. Kan innehålla en hög med föremål",
 	"item.blahaj.bread": "Brödkudde",
 	"tooltip.blahaj.owner.craft": "Skapad av %s",
-	"tooltip.blahaj.owner.rename": "%s av %s"
+	"tooltip.blahaj.owner.rename": "%s av %s",
+	"modmenu.blahaj.users_manual": "Bruksanvisning och Teknisk Referens (endast på engelska)"
 }

@@ -38,5 +38,10 @@
 			}
 		]
 	},
-	"mixin": "blahaj.mixins.json"
+	"mixin": "blahaj.mixins.json",
+	"modmenu": {
+		"links": {
+			"modmenu.blahaj.users_manual": "https://hibiscus.pet/mods/blahaj/manual"
+		}
+	}
 }

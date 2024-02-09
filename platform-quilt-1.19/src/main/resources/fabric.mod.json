@@ -38,5 +38,12 @@
 	},
 	"suggests": {
 		"quilt_loader": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.blahaj.users_manual": "https://hibiscus.pet/mods/blahaj/manual"
+			}
+		}
 	}
 }

@@ -7,5 +7,6 @@
 	"item.blahaj.blue_whale.tooltip": "a.k.a. Blavingad. Holds a stack of items.",
 	"item.blahaj.bread": "Bread Pillow",
 	"tooltip.blahaj.owner.craft": "Crafted by %s",
-	"tooltip.blahaj.owner.rename": "%s of %s"
+	"tooltip.blahaj.owner.rename": "%s of %s",
+	"modmenu.blahaj.users_manual": "User's Manual and Technical Reference"
 }
