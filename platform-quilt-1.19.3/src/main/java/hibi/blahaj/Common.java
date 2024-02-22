@@ -27,6 +27,7 @@ public class Common {
 	public static final Identifier KLAPPAR_HAJ_ID;
 	public static final Identifier BLAVINGAD_ID;
 	public static final Identifier BREAD_ID;
+	public static final Identifier BROWN_BEAR_ID;
 
 	public void onInitializeQuilt(Object _mod) {
 		// NOTE: Cast `_mod` to `ModContainer` before using it.
@@ -46,12 +47,16 @@ public class Common {
 		Item breadPillow = new CuddlyItem(new Item.Settings().maxCount(1), null);
 		Registry.register(Registries.ITEM, BREAD_ID, breadPillow);
 
+		Item brownBear = new CuddlyItem(new Item.Settings().maxCount(1), "item.blahaj.brown_bear.tooltip");
+		Registry.register(Registries.ITEM, BROWN_BEAR_ID, brownBear);
+
 		// Register items to item group
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register((content) -> {
 			content.addItem(blueShark);
 			content.addItem(grayShark);
 			content.addItem(blueWhale);
 			content.addItem(breadPillow);
+			content.addItem(brownBear);
 		});
 
 		LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
@@ -97,5 +102,6 @@ public class Common {
 		KLAPPAR_HAJ_ID = new Identifier("blahaj", "gray_shark");
 		BLAVINGAD_ID = new Identifier("blahaj", "blue_whale");
 		BREAD_ID = new Identifier("blahaj", "bread");
+		BROWN_BEAR_ID = new Identifier("blahaj", "brown_bear");
 	}
 }
