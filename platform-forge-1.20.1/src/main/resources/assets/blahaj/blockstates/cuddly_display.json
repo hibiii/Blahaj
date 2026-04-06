@@ -1,0 +1,12 @@
+{
+	"variants": {
+		"rotation=0": { "model": "blahaj:block/cuddly_display" },
+		"rotation=1": { "model": "blahaj:block/cuddly_display" },
+		"rotation=2": { "model": "blahaj:block/cuddly_display" },
+		"rotation=3": { "model": "blahaj:block/cuddly_display" },
+		"rotation=4": { "model": "blahaj:block/cuddly_display" },
+		"rotation=5": { "model": "blahaj:block/cuddly_display" },
+		"rotation=6": { "model": "blahaj:block/cuddly_display" },
+		"rotation=7": { "model": "blahaj:block/cuddly_display" }
+	}
+}

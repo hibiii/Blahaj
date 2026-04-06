@@ -8,6 +8,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -27,7 +29,16 @@ import net.minecraft.world.InteractionResult;
 @Mod("blahaj")
 public class Blahaj {
 
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "blahaj");
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "blahaj");
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, "blahaj");
+
+	public static final RegistryObject<Block> CUDDLY_BLOCK = BLOCKS.register("cuddly_display",
+		CuddlyBlock::new);
+
+	public static final RegistryObject<BlockEntityType<CuddlyBlockEntity>> CUDDLY_BLOCK_ENTITY =
+		BLOCK_ENTITIES.register("cuddly_display",
+			() -> BlockEntityType.Builder.of(CuddlyBlockEntity::new, CUDDLY_BLOCK.get()).build(null));
 
 	public static final RegistryObject<Item> GRAY_SHARK = ITEMS.register("gray_shark",
 		() -> new CuddlyItem(new Item.Properties().stacksTo(1), "item.blahaj.gray_shark.tooltip"));
@@ -46,7 +57,9 @@ public class Blahaj {
 
 	public Blahaj() {
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+		BLOCKS.register(modBus);
 		ITEMS.register(modBus);
+		BLOCK_ENTITIES.register(modBus);
 		modBus.addListener(this::buildCreativeTab);
 
 		MinecraftForge.EVENT_BUS.addListener(Blahaj::onLootTableLoad);

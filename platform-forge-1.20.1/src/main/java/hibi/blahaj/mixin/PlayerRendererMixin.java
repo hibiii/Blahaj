@@ -24,7 +24,7 @@ public class PlayerRendererMixin {
 	private static void cuddleBlahaj(AbstractClientPlayer player, InteractionHand hand, CallbackInfoReturnable<HumanoidModel.ArmPose> ci) {
 		ItemStack lv = player.getItemInHand(hand);
 		if (lv.getItem() instanceof CuddlyItem) {
-			ci.setReturnValue(ArmPose.CROSSBOW_HOLD);
+			ci.setReturnValue(ArmPose.CROSSBOW_CHARGE);
 			ci.cancel();
 		}
 	}
